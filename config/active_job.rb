@@ -1,5 +1,9 @@
 ActiveJob::Base.queue_adapter = :resque
 
+# The ActiveJob log subscriber is a little noisy and confusing.
+# This code removes its subscriptions to ActiveJob lifecycle
+# events.
+
 ajls = ActiveSupport::LogSubscriber.log_subscribers.find do |ls|
   ls.class == ActiveJob::Logging::LogSubscriber
 end
